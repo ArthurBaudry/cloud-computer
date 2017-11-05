@@ -17,9 +17,18 @@ functions:
   startEC2:
     name: ${self:provider.stage}-startEC2
     handler: startEC2.handler
+    role: ec2Role
     events:
       - http:
           path: users/createInstance
+          method: post
+  terminateEC2:
+    name: ${self:provider.stage}-terminateEC2
+    handler: terminateEC2.handler
+    role: ec2Role
+    events:
+      - http:
+          path: users/deleteInstance
           method: post
 
 resources:
@@ -28,7 +37,7 @@ resources:
       Type: AWS::IAM::Role
       Properties:
         Path: /
-        RoleName: EC2Start
+        RoleName: EC2
         AssumeRolePolicyDocument:
           Version: '2012-10-17'
           Statement:
@@ -38,7 +47,7 @@ resources:
                   - lambda.amazonaws.com
               Action: sts:AssumeRole
         Policies:
-          - PolicyName: EC2StartPolicy
+          - PolicyName: EC2Policy
             PolicyDocument:
               Version: '2012-10-17'
               Statement:

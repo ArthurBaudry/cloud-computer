@@ -30,7 +30,7 @@ resources:
         Path: /
         RoleName: EC2Start
         AssumeRolePolicyDocument:
-          Version: '2017'
+          Version: '2012-10-17'
           Statement:
             - Effect: Allow
               Principal:
@@ -40,7 +40,7 @@ resources:
         Policies:
           - PolicyName: EC2StartPolicy
             PolicyDocument:
-              Version: '2017'
+              Version: '2012-10-17'
               Statement:
                 - Effect: Allow
                   Action:

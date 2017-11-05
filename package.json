@@ -7,9 +7,11 @@
     "aws-sdk": "^2.145.0",
     "vue": "^2.5.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "mocha": "^4.0.1"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "author": "Arthur Baudry",
   "license": "ISC"

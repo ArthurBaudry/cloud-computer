@@ -14,9 +14,9 @@ exports.handler = function (event, context, callback) {
         DryRun: false
     };
 
-    ec2.terminateInstances(params, function (err, data) {
+    ec2.stopInstances(params, function (err, data) {
         if (err) {
-            console.log("Could not terminate instance" + body.instanceId, err);
+            console.log("Could not stop instance" + body.instanceId, err);
             return
         }
 

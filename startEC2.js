@@ -1,12 +1,17 @@
 var AWS = require('aws-sdk');
+//var httpResponse = require('httpResponse');
 
 var ec2 = new AWS.EC2();
 
 exports.handler = function(event, context, callback) {
 
+    var body = JSON.parse(event.body);
+
+    console.log(body)
+
     var params = {
-        ImageId: event.amiId,
-        InstanceType: event.instanceType,
+        ImageId: body.amiId,
+        InstanceType: body.instanceType,
         MinCount: 1,
         MaxCount: 1
     };
@@ -23,35 +28,20 @@ exports.handler = function(event, context, callback) {
         params = {Resources: [instanceId], Tags: [
             {
                 Key: 'User',
-                Value: event.username
+                Value: body.username
             }
         ]};
         ec2.createTags(params, function(err) {
             console.log("Tagging instance", err ? "failure" : "success");
         });
 
+        //TODO Insert data for user in DB
+
         var responseBody = {
             status: "OK",
             input: event
         };
 
-        sendHTTPOKResponse(responseBody, context, callback)
+        httpResponse.sendHTTPOKResponse(responseBody, context)
     });
-}
-
-function sendHTTPOKResponse(responseBody, context, callback) {
-    var responseCode = 200;
-
-    var response = {
-        isBase64Encoded: false,
-        statusCode: responseCode,
-        headers: {
-            "X-CLOUD-COMPUTER-HEADER" : "HEADER"
-        },
-        body: JSON.stringify(responseBody)
-    };
-
-    console.log("response: " + JSON.stringify(response))
-
-    callback(null, response);
 }

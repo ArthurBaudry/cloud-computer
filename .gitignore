@@ -2,4 +2,5 @@
 *.iml
 node_modules
 .serverless
-events/*.json
+*tfstate*
+.terraform

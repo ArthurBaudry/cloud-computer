@@ -1,5 +1,5 @@
 
-module.exports = function sendHTTPOKResponse(responseBody, context) {
+exports.sendHTTPOKResponse = function(responseBody, context) {
     var responseCode = 200;
 
     var response = {

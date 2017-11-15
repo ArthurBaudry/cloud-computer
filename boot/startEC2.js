@@ -1,5 +1,5 @@
 var AWS = require('aws-sdk');
-//var httpResponse = require('httpResponse');
+var httpResponse = require('./libs/httpResponse.js');
 
 var ec2 = new AWS.EC2();
 
